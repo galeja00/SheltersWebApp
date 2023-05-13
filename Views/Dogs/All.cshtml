@@ -1,0 +1,80 @@
+﻿
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<div class="text-center" >
+    <h1 class="display-7 border-bottom p-4">Psy</h1>
+    <a asp-action="AddForm" asp-route-id="-1" class="btn btn-outline-secondary">Přidat psa</a>
+    <!-- -->
+    <form onsubmit="FindDogs()" class="m-4 d-flex flex-column gap-3 justify-content-center">
+           <label for="dogName" class="control-label d-flex justify-content-center">Vyhledej psa:</label>
+           <input type="text" id="dogName" name="dogName" placeholder="Vyhledej psa" class="form-control w-50 m-auto"/>
+           <button type="button" value="find" onclick="FindDogs()" class="btn btn-primary w-50 m-auto">Vyhledat</button>
+    </form>
+    <!-- -->
+    <ul class="harbers-slecection">
+        <script>
+            window.onload = function(){
+                FindDogs();
+            }
+            function FindDogs(){
+                $(".harbers-slecection").empty();
+                const dogName = document.getElementById("dogName").value;
+                fetch(`https://localhost:44354/Dogs/Search?dogName=${dogName}`)
+                    .then(dogs =>  {
+                        if (!dogs.ok) {
+                            throw new Error("HTTP error " + response.status);
+                        }
+                        return dogs.json()
+                    })
+                    .then(dogs => {
+                        dogs.forEach(dog => {
+                            console.log(dog.Name);
+                            const $li = $("<li>", {"class": "harbers-slecection__item"});
+                            const $img = $("<img>", {src: "https://placehold.co/200x200", alt: "logo", "class": "harbars__item-img"});
+                            $li.append($img);
+                            const $dl = $("<dl>", {"class": "harbers-slecection__inf"});
+                            const $div1 = $("<div>");
+                            const $dt1 = $("<dt>", {text: "Jmeno"});
+                            const $dd1 = $("<dd>", {text: dog.name});
+                            $div1.append($dt1);
+                            $div1.append($dd1);
+                            $dl.append($div1);
+                            const $div3 = $("<div>");
+                            const $dt3 = $("<dt>", {text: "Věk"});
+                            const $dd3 = $("<dd>", {text: dog.age});
+                            $div3.append($dt3);
+                            $div3.append($dd3);
+                            $dl.append($div3);
+                            const $div4 = $("<div>");
+                            const $dt4 = $("<dt>", {text: "Plemeno"});
+                            const $dd4 = $("<dd>", {text: dog.breed});
+                            $div4.append($dt4);
+                            $div4.append($dd4);
+                            $dl.append($div4);
+                            const $div5 = $("<div>");
+                            const $dt5 = $("<dt>", {text: "Pohlaví"});
+                            const $dd5 = $("<dd>", {text: dog.sex});
+                            $div5.append($dt5);
+                            $div5.append($dd5);
+                            $dl.append($div5);
+                            $li.append($dl);
+                            const $btnDiv = $("<div>", {"class": "harbers-slecection__buttons"});
+                            const $btn1 = $("<a>", { href: "/Dogs/Remove?dogId=" + dog.id ,"class": "btn btn-primary", text: "Adoptovat"});
+                            const $btn2 = $("<a>", { href: "/Dogs/Info/" + dog.id ,"class": "btn btn-secondary", text: "Info"});
+                            $btnDiv.append($btn1);
+                            $btnDiv.append($btn2);
+                            $li.append($btnDiv);
+                            $(".harbers-slecection").append($li);
+                        })
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    });
+            } 
+            
+        </script>
+    </ul>
+</div>

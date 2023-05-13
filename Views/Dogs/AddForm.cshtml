@@ -1,0 +1,65 @@
+﻿
+@{
+    ViewData["Title"] = "Přidej psa do útulku";
+    Layout = "_Layout";
+    int hiId = -1;
+    if (ViewBag.Harbar != null)
+    {
+        hiId = ViewBag.Harbar.Id;
+    }
+    
+}
+@model Dog
+<div class="form__connt">
+    <h1>Přidat psa</h1>
+    <!-- -->
+    <form asp-action="Add" class="col-form-label">
+        @if (hiId != -1)
+        {
+            <input asp-for="HarbarID" value="@hiId" type="hidden" class="form-control"/>
+        }
+        <div>
+            <label asp-for="Name" class="control-label">Jméno:</label>
+            <input asp-for="Name" required class="form-control"/>
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="Breed" class="control-label">Plemeno:</label>
+            <input asp-for="Breed" required class="form-control"/>
+            <span asp-validation-for="Breed" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="Sex" class="control-label">Pohlaví:</label>
+            <input asp-for="Sex" required  class="form-control"/>
+            <span asp-validation-for="Sex" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="Age" class="control-label">Věk:</label>
+            <input asp-for="Age" required min="0" max="50" class="form-control"/>
+            <span asp-validation-for="Age" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="Description" class="control-label">Popis:</label>
+            <textarea asp-for="Description" required class="form-control form__text-in"></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+        @if (hiId == -1)
+        {
+            <div>
+                <label asp-for="HarbarID" class="control-label">Vyber útulek:</label>
+                <select asp-for="HarbarID" required class="form-select">
+                    @foreach (Harbar hr in ViewBag.ListHarbars)
+                    {
+                        if (hr.MaxCapacity > hr.UseCapacity)
+                        {
+                            <option value="@hr.Id">@hr.Name</option>
+                        }
+                    }
+                </select>
+                <span asp-validation-for="HarbarID" class="text-danger"></span>
+            </div>
+        }
+        <button type="submit" value="Send" class="btn btn-primary">Přidat</button>
+    </form>
+</div>
+

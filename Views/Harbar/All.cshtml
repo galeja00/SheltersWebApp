@@ -1,0 +1,41 @@
+﻿
+
+@{
+    ViewData["Title"] = "Vyber útulek";
+    Layout = "_Layout";
+    
+}
+
+
+@model List<Harbar>
+<div class="text-center">
+    <h1 class="display-7 border-bottom p-4">Útulky</h1>
+    <a asp-action="Add" class="btn btn-outline-secondary">Vytvořit útulek</a>
+    <form asp-controller="Harbar" asp-action="SelectHarbars" class="m-4 d-flex flex-column gap-3 justify-content-center">
+        <label for="nameOfHarbar" class="control-label d-flex justify-content-center">Vyhledej útulek:</label>
+        <input type="text" name="nameOfHarbar" placeholder="Vyhledat útulek" class="form-control w-50 m-auto"/>
+        <button type="submit" value="find" class="btn btn-primary w-50 m-auto">Vyhledat</button>
+    </form>
+    <ul class="harbars__list">
+        @foreach (Harbar h in Model)
+            {
+                <li class="harbars__item">
+                    <img src="https://placehold.co/200x200" alt="logo"/>
+                    <div class="harbars__item-info">
+                        <div class="harbars__item-name">@h.Name</div>
+                        <dl class="harbars__item-info">
+                            <div class="w-50">
+                                <dt>Adresa</dt>
+                                <dd>@h.Address.City, @h.Address.Street @h.Address.DescriptiveNumber/@h.Address.OrientationNumber</dd>
+                            </div>
+                            <div class="w-50">
+                                <dt>Kapacita</dt>
+                                <dd>@h.UseCapacity/@h.MaxCapacity</dd>
+                            </div>
+                        </dl>
+                        <a asp-action="Info" asp-route-id="@h.Id" class="btn btn-outline-primary">Psi v útulku</a>
+                    </div>
+                </li>
+            }
+    </ul>
+</div>

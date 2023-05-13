@@ -1,0 +1,11 @@
+﻿@{
+    ViewData["Title"] = "Vyber útulek";
+}
+@model List<Harbar>
+<div class="text-center">
+    <h1 class="display-7 mb-4 border-bottom p-4">Výtej na Útulky.cz</h1>
+    <div class="d-flex gap-2 justify-content-center">
+        <a asp-controller="Harbar" asp-action="All" class="btn btn-primary w-25">Utulky</a>
+        <a asp-controller="Dogs" asp-action="All" class="btn btn-secondary w-25">Psy</a>
+    </div>
+</div>

@@ -1,0 +1,12 @@
+﻿@model Harbar
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<div class="dog-info__connt">
+    <h1>Děkuje vám za adoptaci útulek @Model.Name</h1>
+    <a asp-controller="Harbar" asp-action="Info" asp-route-id="@Model.Id" class="btn btn-outline-secondary">Zpět</a>
+</div>
+

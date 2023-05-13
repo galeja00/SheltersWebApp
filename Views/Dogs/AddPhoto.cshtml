@@ -1,0 +1,20 @@
+﻿
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+@model Dog
+<div class="form__connt">
+    <h1>Přidej Fotku</h1>
+    <form asp-action="AddPhoto" method="post" enctype="multipart/form-data">
+        <input name="dogId" value="@Model.Id" type="hidden"/>
+        <label for="dogPhoto">Přidej fotku:</label>
+        <input type="file" id="dogPhoto" name="dogPhoto"/>
+        <span for="dogPhoto"></span>
+        <div class="form__butts">
+            <button type="submit" value="Sand" class="btn btn-primary m-0">Odeslat</button>
+            <a asp-action="All" class="btn btn-outline-secondary">Přeskočit</a>
+        </div>
+    </form>
+</div>

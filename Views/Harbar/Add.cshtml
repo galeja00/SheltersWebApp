@@ -1,0 +1,45 @@
+﻿@model Harbar
+
+@{
+    ViewData["Title"] = "Přidej útulek";
+    Layout = "_Layout";
+}
+<div class="form__connt">
+    <h1>Přidat útulek</h1>
+    <form asp-action="Add" class="col-form-label">
+        <div>
+            <label asp-for="Name" class="control-label">Jméno:</label>
+            <input asp-for="Name" required class="form-control"/>
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="MaxCapacity" class="control-label">Kapacita:</label>
+            <input asp-for="MaxCapacity" required min="1"  class="form-control"/>
+            <span asp-validation-for="MaxCapacity" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="Address.City" class="control-label">Město</label>
+            <input asp-for="Address.City" required class="form-control"/>
+            <span asp-validation-for="Address.City" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="Address.Street" class="control-label">Ulice</label>
+            <input asp-for="Address.Street" required class="form-control"/>
+            <span asp-validation-for="Address.Street" class="text-danger"></span>
+        </div>
+        <div class="form__side-by-side">
+            <div>
+                <label asp-for="Address.DescriptiveNumber" class="control-label">Číslo popisné:</label>
+                <input asp-for="Address.DescriptiveNumber" required min="1" max="10000" class="form-control"/>
+                <span asp-validation-for="Address.DescriptiveNumber" class="text-danger"></span>
+            </div>
+            <div>
+                <label asp-for="Address.OrientationNumber" class="control-label">Číslo orientační:</label>
+                <input asp-for="Address.OrientationNumber" required  min="1" max="1000" class="form-control"/>
+                <span asp-validation-for="Address.OrientationNumber" class="text-danger"></span>
+            </div>
+        </div>
+        <button type="submit" value="Send" class="btn btn-primary">Přidat</button>
+        
+    </form>
+</div>

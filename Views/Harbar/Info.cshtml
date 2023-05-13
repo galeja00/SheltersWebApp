@@ -1,0 +1,103 @@
+﻿@model Harbar
+
+@{
+    ViewData["Title"] = "Utulek " + @Model.Name;
+    Layout = "_Layout";
+    var dogs = Model.Dogs.ToList();
+    int sym = 0;
+    if (ViewBag.dogs != null)
+    {
+        dogs = ViewBag.dogs;
+        sym = 1;
+
+    }
+}
+
+<div class="text-center">
+    <div class="harbar__head">
+        <img class="" src="https://placehold.co/200x200" alt="obraze utulku"/>
+        <h1 class="display-4">@Model.Name</h1>
+    </div>
+    <h2>Informace o útulku</h2>
+    <dl class="d-flex flex-row justify-content-evenly m-4 align-items-center border-bottom pb-4">
+        <div class="d-flex flex-column h-100 align-items-center">
+            <dt>Město</dt>
+            <dd>@Model.Address.City</dd>
+        </div>
+        <div class="d-flex flex-column h-100 align-items-center">
+            <dt>Adresa</dt>
+            <dd>@Model.Address.Street @Model.Address.DescriptiveNumber/@Model.Address.OrientationNumber</dd>
+        </div>
+        <div class="d-flex flex-column h-100 align-items-center">
+            <dt>Kapacita</dt>
+            <dd>@Model.UseCapacity/@Model.MaxCapacity</dd>
+        </div>
+        <div class="d-flex flex-column h-100 align-items-center">
+            @if (dogs.Count() < Model.MaxCapacity)
+            {
+                <dt class="visually-hidden">Přidat:</dt>
+                <dd>
+                    <a asp-controller="Dogs" asp-action="AddForm" asp-route-id="@Model.Id" class="btn btn-outline-secondary">Přidat psa</a>
+                </dd>
+            }
+            else
+            {
+                <dt>Přidat psa</dt>
+                <dd>útulek je plný</dd>
+            }
+        </div>
+    </dl>
+    <h2>Psi v útulku</h2>
+    <form asp-controller="Harbar" asp-action="Search" class="m-4 d-flex flex-column gap-3 justify-content-center">
+        <label for="Name" class="control-label d-flex justify-content-center">Vyhledej psa:</label>
+        <input type="hidden" name="moduleId" value="@Model.Id"/>
+        <input type="text" name="nameOfDog" placeholder="Vyhledat psa" class="form-control w-50 m-auto"/>
+        <button type="submit" value="find" class="btn btn-primary w-50 m-auto">Vyhledat</button>
+    </form>
+    <ul class="harbers-slecection">
+        @if (dogs.Any())
+        {
+            foreach (Dog d in dogs)
+            {
+                <li class="harbers-slecection__item">
+                    @if (string.IsNullOrEmpty(d.photoImg))
+                    {
+                        <img src="https://placehold.co/600x400" alt="obrazek psa"> 
+                    }
+                    else
+                    {
+                        <img src="/images/dogs/@d.photoImg" alt="obarzek psa"/>
+                    }
+                    
+                    <dl class="harbers-slecection__inf">
+                        <div>
+                            <dt>Jmeno:</dt>
+                            <dd>@d.Name</dd>
+                        </div>
+                        <div>
+                            <dt>Plemeno:</dt>
+                            <dd>@d.Breed</dd>
+                        </div>
+                        <div>
+                            <dt>Věk:</dt>
+                            <dd>@d.Age</dd>
+                        </div>
+                        <div>
+                            <dt>Pohlaví:</dt>
+                            <dd>@d.Sex</dd>
+                        </div>
+                    </dl>
+                    <div class="harbers-slecection__buttons">
+                        <a asp-controller="Dogs" asp-action="Remove" asp-route-dogID="@d.Id" class="btn btn-primary">Adoptovat</a>
+                        <a asp-controller="Dogs" asp-action="Info" asp-route-id="@d.Id" class="btn btn-secondary">Info</a>
+                    </div>
+                </li>
+            }
+        }
+    </ul>
+    @if (!dogs.Any() && sym == 1)
+    {
+        <p>Nenašli jsme žádného psa</p>
+        <a asp-action="Info" asp-route-id="@Model.Id">Všichni psi</a>
+    }
+</div>

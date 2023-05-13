@@ -1,0 +1,42 @@
+﻿@model Dog
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+<div class="dog-info__connt">
+    <div class="dog-info">
+        @if (string.IsNullOrEmpty(Model.photoImg))
+        {
+            <img src="https://placehold.co/600x400"/>
+        }
+        else
+        {
+            <img src="/images/dogs/@Model.photoImg"/>
+        }
+        <div>
+            <h1>@Model.Name</h1>
+            <dl>
+                <dt>Plemeno:</dt>
+                <dd>@Model.Breed</dd>
+                <dt>Věk:</dt>
+                <dd>@Model.Age</dd>
+                <dt>Pohlaví:</dt>
+                <dd>@Model.Sex</dd>
+
+                <dt>Utulek:</dt>
+                <dd>@Model.Harbar.Name</dd>
+                <dt>Umistění útulku:</dt>
+                <dd>@Model.Harbar.Address.City</dd>
+                <dt>Addresa utulkue:</dt><dd>@Model.Harbar.Address.Street @Model.Harbar.Address.DescriptiveNumber/@Model.Harbar.Address.OrientationNumber</dd>
+            </dl>
+        </div>
+    </div>
+    <div class="fw-bold">Popis:</div>
+    <div>@Model.Description</div>
+    <div class="dog-info__buttons">
+        <a asp-action="Remove" asp-route-dogId="@Model.Id" class="btn btn-primary">Adoptovat</a>
+        <a asp-action="Info" asp-controller="Harbar" asp-route-id="@Model.HarbarID" class="btn btn-secondary">Utulek</a>
+    </div>
+    
+</div>
