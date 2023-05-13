@@ -4,9 +4,7 @@
 
 <h2>Installation</h2>
 
-<p>
- To run this application locally, you will need to have Visual Studio and .NET Framework installed. You will also need to have Entity Framework Core installed. Once you have those installed, you can clone this repository and open the solution file in JetBrains Rider or Visual Studio.
-<p>
+To run this application locally, you will need to have JetBrains Rider or Visual Studio and .NET installed. You will also need to have Entity Framework Core installed. Once you have those installed, you can clone this repository and open the solution file in JetBrains Rider or Visual Studio.
   
 Once the solution is open, you will need to run the following command in the Package Manager Console:
 
