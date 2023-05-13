@@ -1,3 +1,4 @@
-Maked in 2 weaks and isnt done.
-There is no loging system and security measures.
+Shelter App
+
+This application is a work-in-progress that allows users to create shelters and add dogs to them. Please note that this application does not currently have a login system and does not validate inputs on the backend.
 
