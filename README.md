@@ -10,8 +10,8 @@
   
 Once the solution is open, you will need to run the following command in the Package Manager Console:
 
- <code>Update-Database</code>
+<code>Update-Database</code>
 
 This will create the necessary database tables for the application.
 
-After running this command, you can build and run the application by pressing F5 or clicking on the "Run" button in the toolbar.
+
