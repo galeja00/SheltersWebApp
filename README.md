@@ -1,17 +1,18 @@
-<h1>Shelter App</h1>
+Shelter App
 
-<p>This application is a work-in-progress that allows users to create shelters and add dogs to them. Please note that this application does not currently have a login system and does not validate inputs on the backend.</p>
+This application is a work-in-progress that allows users to create shelters and add dogs to them. Please note that this application does not currently have a login system and does not validate inputs on the backend.
 
-if you wont take this code and custom it.
+If you want to customize this code, follow these instructions:
 
-<h2>Installation</h2>
+Installation
 
-To run this application locally, you will need to have JetBrains Rider or Visual Studio and .NET installed. You will also need to have Entity Framework Core installed. Once you have those installed, you can clone this repository and open the solution file in JetBrains Rider or Visual Studio.
-  
-Once the solution is open, you will need to run the following command in the Package Manager Console:
+To run this application locally, you will need to have JetBrains Rider or Visual Studio and .NET installed. You will also need Entity Framework Core installed. Once you have those installed, you can clone this repository and open the solution file in JetBrains Rider or Visual Studio.
 
-<code>Update-Database</code>
+Once the solution is open, run the following command in the Package Manager Console:
 
+<code>
+Update-Database
+</code>
 This will create the necessary database tables for the application.
 
 
